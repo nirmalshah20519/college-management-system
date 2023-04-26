@@ -1,0 +1,28 @@
+    <nav class="navbar navbar-expand-sm navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand h1" href="#">CMS <span class="fst-italic h6 text-warning">Admin Panel</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+                aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-between px-4" id="navbarID">
+                <div class="d-flex justify-content-start">                
+                    <div class="navbar-nav">
+                        <a class="nav-link active" routerLink="/admin" >Home</a>
+                    </div>
+                    <div class="navbar-nav">
+                        <a class="nav-link"  >Students</a>
+                    </div>
+                    <div class="navbar-nav">
+                        <a class="nav-link"  >Faculty</a>
+                    </div>
+                    <div class="navbar-nav">
+                        <a class="nav-link" routerLink="./courses" routerLinkActive="text-light h2 " >Course</a>
+                    </div>
+                </div>
+                <div class="navbar-nav">
+                    <a class="btn btn-sm btn-danger" (click)="handleLogout()" aria-current="page" >LogOut</a>
+                </div>
+            </div>
+        </div>
+    </nav>

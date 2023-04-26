@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-sm bg-warning">
+    <div class="container">
+        <a class="navbar-brand">CMS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+            aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarID">
+            <div class="navbar-nav">
+                <a class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Login">Login</a>                    
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <p class="h1 text-center">Welcome To</p>
+    <p class="display-1 text-center">College Management System</p> 
+</div>
+
+<button type="button" class="d-none" data-bs-toggle="modal" data-bs-target="#MessageModal" id="triggerMessageModal">yu</button>
+
+<!-- <router-outlet></router-outlet> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div class="modal-header bg-info">
+                        <h5 class="modal-title h2" id="modalTitleId">Login</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                <form [formGroup]="Login">
+                    <div class="mb-3">
+                      <label for="" class="form-label">User ID</label>
+                      <input type="text"
+                        class="form-control" formControlName="UserID" aria-describedby="helpId" placeholder="">
+                      <small *ngIf="Login.get('UserID')?.errors?.['required'] && Login.get('UserID')?.touched" class="form-text text-danger">* User ID is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Password</label>
+                        <input type="password"
+                          class="form-control" formControlName="Password" aria-describedby="helpId" placeholder="">
+                        <small *ngIf="Login.get('Password')?.errors?.['required'] && Login.get('Password')?.touched" class="form-text text-danger">* Password is required</small>
+                      </div>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="handleLogin()" [disabled]="Login.invalid">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="MessageModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <div [class]="ModalObj.bs5_Title_Class">
+                        <h5 class="modal-title h2" id="modalTitleId">{{ModalObj.Title}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+                    </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    {{ModalObj.Message}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
