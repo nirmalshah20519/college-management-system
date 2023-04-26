@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Course, CourseClass } from 'src/Models/Course';
-import { Faculty, tempFaculty } from 'src/Models/Faculty';
+import { Faculty, tempFaculty, tempFacultyClass } from 'src/Models/Faculty';
 import { Role } from 'src/Models/Role';
-import { Student, StudentClass, tempStudent } from 'src/Models/Student';
+import { Student, tempStudent, tempStudentClass } from 'src/Models/Student';
 import { User, UserClass } from 'src/Models/User';
 
 @Injectable({
@@ -28,6 +28,15 @@ export class DataService {
 
     this.addCourse('Javascript', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error veritatis perferendis dolorem maiores ipsam magni,');
     this.addCourse('Typescript', ' unde soluta ipsum et consectetur voluptate iusto illum iure nihil voluptates placeat enim cupiditate libero.');
+
+    this.addFaculty(new tempFacultyClass('Nirmal Shah','male','nirmal@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Vishal Chaudhary','male','vishal@gmail.com',[]))
+
+    this.addStudent(new tempStudentClass('Bradley Bell','male','ive@bafvu.bb',[]))
+    this.addStudent(new tempStudentClass('Andre Dennis','male','wudi@juttezsu.cy',[]))
+    this.addStudent(new tempStudentClass('Helen Norman','male','fi@vojaru.bs',[]))
+    this.addStudent(new tempStudentClass('Seth Waters','male','ukezu@sajekdo.zm',[]))
+    this.addStudent(new tempStudentClass('Dustin Farmer','male','pij@wehwertu.al',[]))
    }
 
    addUser(usrID:string, Passwd:string, Role:number){
@@ -35,7 +44,7 @@ export class DataService {
    }
 
    addCourse(name:string, desc:string){
-    this.CourseList.push(new CourseClass(this.CID, name, desc))
+    this.CourseList.push(new CourseClass(this.CID, name, desc, [], []))
    }
 
    addStudent(studObj:tempStudent){

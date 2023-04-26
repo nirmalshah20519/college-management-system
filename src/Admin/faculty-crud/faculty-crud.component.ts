@@ -26,6 +26,7 @@ export class FacultyCRUDComponent {
       Email: ['', [Validators.required, Validators.email]],
       Gender: ['', [Validators.required]],
     });
+
   }
 
   get facultylist(){

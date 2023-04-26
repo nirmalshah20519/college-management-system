@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/Models/Course';
+import { Faculty } from 'src/Models/Faculty';
+import { Student } from 'src/Models/Student';
 import { DataService } from 'src/Services/data.service';
 
 @Component({
@@ -14,7 +16,10 @@ export class ManageCourseComponent {
   currCourse!:Course|undefined;
   NameEditMode:boolean=false;
   DescEditMode:boolean=false;
-  constructor(private fb:FormBuilder, private rt:ActivatedRoute, private serv:DataService){
+  AvailableFaculty:Faculty[]=[];
+  currFaculty!:number;
+  
+  constructor(private fb:FormBuilder, private rt:ActivatedRoute, private serv:DataService, private route:Router){
     rt.paramMap.subscribe(val=>{
       let cid = val.get('CID');
       if(cid){
@@ -23,8 +28,13 @@ export class ManageCourseComponent {
       }
       console.log(this.currCID);
     })
+    this.serv.FacultyList.forEach(f=>{
+      if(!this.currCourse?.FacultiesAssigned.includes(f.FID)){
+        this.AvailableFaculty.push(f)
+      }
+    })
   }
-
+  
   get CurrSub(){
     return this.serv.currSub
   }
@@ -69,6 +79,55 @@ export class ManageCourseComponent {
       this.serv.CourseList[index]=temp;
       this.NameInput=""
     }
+  }
+
+  DeleteCourse(){
+    this.serv.CourseList=this.serv.CourseList.filter(c=>c!==this.currCourse);
+    this.route.navigateByUrl('/admin/courses')
+  }
+
+  getFacultyByID(id:number){
+    return this.serv.FacultyList.find(f=>f.FID===id)
+  }
+
+  AddFac(){
+    let fac=this.serv.FacultyList.find(f=>f.FID===Number(this.currFaculty));
+    let findex=this.serv.FacultyList.findIndex(f=>f.FID===this.currFaculty);
+    let cindex=this.serv.CourseList.findIndex(c=>c===this.currCourse);
+    if(findex!==-1 && this.currCourse?.CID!==undefined && fac!== undefined){
+      fac?.CoursesTaking.push(this.currCourse?.CID);
+      this.serv.FacultyList[findex]=fac;
+    }
+    if(cindex!==-1 && fac!== undefined && this.currCourse!==undefined){
+      this.currCourse?.FacultiesAssigned.push(fac?.FID);
+      this.serv.CourseList[cindex]=this.currCourse
+    }
+
+    this.AvailableFaculty=this.AvailableFaculty.filter(af=>af.FID!==fac?.FID)
+
+  }
+
+  getEnrolledStudents(){    
+    let EnrolledStudents:Student[]=[];
+    this.serv.StudentList.forEach(s=>{
+      if(this.currCourse?.CID!==undefined){
+        if(s.CoursesEnrolled.includes(this.currCourse?.CID)){
+          EnrolledStudents.push(s)
+        }      
+      }      
+    })
+    return EnrolledStudents
+  }
+  getUnenrolledStudents(){
+    return this.serv.StudentList.filter(s=>!this.getEnrolledStudents().includes(s))    
+  }
+
+  AddStu(Stu:Student){
+    if(this.currCourse?.CID!==undefined)
+    Stu.CoursesEnrolled.push(this.currCourse?.CID);
+
+    let sindex=this.serv.StudentList.findIndex(s=>s===Stu);
+    this.serv.StudentList[sindex]=Stu;
   }
 
 }

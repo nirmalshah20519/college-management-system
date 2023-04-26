@@ -1,12 +1,13 @@
 <div class="container p-2">
-    <div>
+    <div class="d-flex justify-content-between">
         <a routerLink="../" (click)="setCurrSub(undefined)" class="btn btn-sm btn-dark">Back</a>
+        <a (click)="DeleteCourse()" class="btn btn-sm btn-danger">Delete Course</a>
     </div>
     <p class="text-center display-4">
         Manage {{CurrSub}}
     </p>
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-3">
         <p class="text-dark">Course ID : <span class="fw-bold text-primary">{{currCourse?.CID}}</span></p>
         <p class="text-dark d-flex justify-content-between"> 
             <span>Course Name : 
@@ -18,7 +19,7 @@
                     Edit
                 </span>
                 <span *ngIf="NameEditMode">
-                    <span  class="btn btn-sm btn-outline-danger" (click)="handleNameCancel()">
+                    <span  class="btn btn-sm btn-outline-danger me-3" (click)="handleNameCancel()">
                         Cancel
                     </span>
                     <span  class="btn btn-sm btn-outline-success" (click)="handleNameEditSave(currCourse?.CID)">
@@ -37,7 +38,7 @@
                     Edit
                 </span>
                 <span *ngIf="DescEditMode">
-                    <span  class="btn btn-sm btn-outline-danger" (click)="handleDescCancel()">
+                    <span  class="btn btn-sm btn-outline-danger me-3" (click)="handleDescCancel()">
                         Cancel
                     </span>
                     <span  class="btn btn-sm btn-outline-success" (click)="handleDescEditSave(currCourse?.CID)">
@@ -47,5 +48,91 @@
             </span> 
         </p>
     </div>
+    <div class="row row-cols-2">
+        <div class="container-fluid ">
+            <table class="table table-bordered table-hover w-100 mx-auto">
+                <caption></caption>
+                <thead class="table-primary">
+                    <tr>
+                        <th>Faculty Assigned</th>
+                    </tr>                
+                </thead>
+                <tbody class="table-success">
+                    <ng-container *ngIf="currCourse?.FacultiesAssigned?.length===0 else facList">
+                        <tr>
+                            <td>No Faculty Assigned</td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #facList>
+                        <ng-container *ngFor="let f of currCourse?.FacultiesAssigned">
+                            <tr>
+                                <td>{{getFacultyByID(f)?.Name}}</td>
+                            </tr>
+                        </ng-container>
+                    </ng-template>
+                    
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>                        
+                                <div class="d-flex gap-2">
+                                    <select [(ngModel)]="currFaculty" class="form-select form-select-sm" name="" id="">
+                                        <option selected disabled>Select one</option>
+                                        <ng-container *ngFor="let f of AvailableFaculty">
+                                            <option [value]="f.FID">{{f.Name}}</option>
+                                        </ng-container>
+                                    </select>
+                                    <button class="btn btn-sm btn-dark" [disabled]="currFaculty===undefined" (click)="AddFac()">Add</button>
+                                </div>
+                                
+                            
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+    
+        </div>
+        <div class="container-fluid ">
+            <table class="table table-bordered table-hover w-100 mx-auto">
+                <caption></caption>
+                <thead class="table-primary">
+                    <tr>
+                        <th>Students Enrolled</th>
+                    </tr>                
+                </thead>
+                <tbody class="table-success">
+                    <ng-container *ngIf="getEnrolledStudents().length===0 else StuList">
+                        <tr>
+                            <td>No Student Enrolled</td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #StuList>
+                        <ng-container *ngFor="let s of getEnrolledStudents()">
+                            <tr>
+                                <td>{{s.Name}}</td>
+                            </tr>
+                        </ng-container>
+                    </ng-template>
+                    
+                </tbody>
+                <tfoot>
+                    <ng-container *ngFor="let S of getUnenrolledStudents()">
+                    <tr>
+                        <td>
+                            <div class="d-flex justify-content-between gap-2">
+                                <p>{{S.Name}}</p>
+                                <button class="btn btn-sm btn-dark" (click)="AddStu(S)">Add</button>
+                            </div>
+
+                        </td>
+                    </tr>
+                </ng-container>
+                </tfoot>
+            </table>
+    
+        </div>
+
+    </div>
+    
     
 </div>

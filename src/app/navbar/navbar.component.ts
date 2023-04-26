@@ -21,8 +21,8 @@ export class NavbarComponent {
       Password:["",[Validators.required]]
     });
 
-    // this.serv.login('admin', 'admin');
-    // this.navigateByRole('admin');
+    this.serv.login('admin', 'admin');
+    this.navigateByRole('admin');
   }
 
   get userID(){
