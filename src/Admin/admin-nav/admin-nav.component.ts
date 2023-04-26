@@ -19,4 +19,12 @@ export class AdminNavComponent {
     console.log(this.serv.CurrentUser);
   }
 
+  get CurrCourse(){
+    return this.serv.currSub
+  }
+
+  setCurrSub(subName:string|undefined){
+    this.serv.currSub=subName
+  }
+
 }

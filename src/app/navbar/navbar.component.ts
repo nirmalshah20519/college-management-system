@@ -20,6 +20,9 @@ export class NavbarComponent {
       UserID:["",[Validators.required]],
       Password:["",[Validators.required]]
     });
+
+    // this.serv.login('admin', 'admin');
+    // this.navigateByRole('admin');
   }
 
   get userID(){
@@ -44,7 +47,6 @@ handleModal(messageObj:Message, flag:boolean|null){
     let flag=this.serv.login(this.userID, this.Password);
     switch(flag){
       case true: this.handleModal(new MessageClass(`Welcome back ${this.userID}!`,`Hii ${this.userID}, Great to see you back Online`,'modal-header bg-success'), flag)
-        console.log("Hello ");
         
                   break;
       case false: this.handleModal(new MessageClass(`Wrong Password`,`Hii ${this.userID}, The Password You entered is wrong please try again with right password`,'modal-header bg-danger'), flag);

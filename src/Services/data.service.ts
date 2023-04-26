@@ -1,19 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Course, CourseClass } from 'src/Models/Course';
+import { Faculty, tempFaculty } from 'src/Models/Faculty';
 import { Role } from 'src/Models/Role';
+import { Student, StudentClass, tempStudent } from 'src/Models/Student';
 import { User, UserClass } from 'src/Models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  UserList:User[]=[];
   CurrentUser!:User;
+  UserList:User[]=[];
   CourseList:Course[]=[];
+  StudentList:Student[]=[];
+  FacultyList:Faculty[]=[];
+  currSub!:string|undefined;
+  setSub(sub:string){
+    this.currSub=sub
+  }
+  setUndef(){
+    this.currSub=undefined
+  }
   constructor() {
     this.UserList.push(new UserClass(this.ID, 'admin','admin',Role.Admin));
     this.UserList.push(new UserClass(this.ID, 'faculty','123456',Role.Faculty));
     this.UserList.push(new UserClass(this.ID, 'Student','123456',Role.Student));
+
+    this.addCourse('Javascript', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error veritatis perferendis dolorem maiores ipsam magni,');
+    this.addCourse('Typescript', ' unde soluta ipsum et consectetur voluptate iusto illum iure nihil voluptates placeat enim cupiditate libero.');
    }
 
    addUser(usrID:string, Passwd:string, Role:number){
@@ -21,8 +35,37 @@ export class DataService {
    }
 
    addCourse(name:string, desc:string){
-    console.log(this.CID);
     this.CourseList.push(new CourseClass(this.CID, name, desc))
+   }
+
+   addStudent(studObj:tempStudent){
+    let id=this.ID;
+    let passwd='123456'
+    this.StudentList.push({SID:id,Password:passwd,...studObj});
+    let usrID=studObj.Name.split(" ")[0].toLowerCase()+'.'+studObj.Name.split(" ")[1].toLowerCase();
+    this.AllUsers.forEach(u=>{
+      if(u.UserID===usrID){
+        usrID+=String(id)
+      }
+    });
+    let tempUsr=new UserClass(id, usrID, passwd, Role.Student)
+    this.UserList.push(tempUsr)
+    console.log(tempUsr);
+   }
+
+   addFaculty(facObj:tempFaculty){
+    let id=this.ID;
+    let passwd='654321'
+    this.FacultyList.push({FID:id,Password:passwd,...facObj});
+    let usrID=facObj.Name.split(" ")[0].toLowerCase()+'.'+facObj.Name.split(" ")[1].toLowerCase();
+    this.AllUsers.forEach(u=>{
+      if(u.UserID===usrID){
+        usrID+=String(id)
+      }
+    });
+    let tempUsr=new UserClass(id, usrID, passwd, Role.Faculty)
+    this.UserList.push(tempUsr)
+    console.log(tempUsr);
    }
 
    get ID(){

@@ -27,6 +27,8 @@ export class CourseCRUDComponent {
       Name: ['', [Validators.required]],
       Description: ['', [Validators.required]],
     });
+
+
   }
 
   get courseList() {
@@ -43,30 +45,10 @@ export class CourseCRUDComponent {
 
   addCourse() {
       this.serv.addCourse(this.Title, this.Description);
-      console.log(this.Title, this.Description);
       this.Course.reset();
   }
 
-  updateCourse(){
-    if(this.curr!==null){
-      let updatedCourse=new CourseClass(this.curr,this.Title,this.Description)
-      let index=this.serv.CourseList.findIndex(c=>c.CID===this.curr)
-      if(index!==-1){
-        this.serv.CourseList[index]=updatedCourse
-    }
-    }
-    this.curr=null
-    this.Course.reset();
-    
-  }
-
-  handleUpdateCourse(course: Course) {
-    this.curr=course.CID
-    this.setFlag(true)
-    this.Course.patchValue(course)
-  }
-
-  handleDelete(course:Course){
-    this.serv.CourseList=this.serv.CourseList.filter(c=>c!==course)
+  setCurrSub(subName:string){
+    this.serv.currSub=subName
   }
 }

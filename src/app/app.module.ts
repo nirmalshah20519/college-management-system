@@ -19,9 +19,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminModule,
-    FacultyModule,
-    StudentModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -1,0 +1,51 @@
+<div class="container p-2">
+    <div>
+        <a routerLink="../" (click)="setCurrSub(undefined)" class="btn btn-sm btn-dark">Back</a>
+    </div>
+    <p class="text-center display-4">
+        Manage {{CurrSub}}
+    </p>
+
+    <div class="container-fluid">
+        <p class="text-dark">Course ID : <span class="fw-bold text-primary">{{currCourse?.CID}}</span></p>
+        <p class="text-dark d-flex justify-content-between"> 
+            <span>Course Name : 
+                <span *ngIf="!NameEditMode" class="fw-bold text-primary">{{currCourse?.Name}}</span> 
+                <span *ngIf="NameEditMode" class="fw-bold text-primary"><input [(ngModel)]="NameInput" type="text" class="form-control-sm" placeholder="Edit Course Title"></span> 
+            </span> 
+            <span >
+                <span *ngIf="!NameEditMode" class="btn btn-sm btn-outline-primary" (click)="handleNameEdit(currCourse?.Name)">
+                    Edit
+                </span>
+                <span *ngIf="NameEditMode">
+                    <span  class="btn btn-sm btn-outline-danger" (click)="handleNameCancel()">
+                        Cancel
+                    </span>
+                    <span  class="btn btn-sm btn-outline-success" (click)="handleNameEditSave(currCourse?.CID)">
+                        Update
+                    </span>
+                </span>
+            </span> 
+        </p>
+        <p class="text-dark d-flex justify-content-between"> 
+            <span>Course Description : 
+                <span *ngIf="!DescEditMode" class="fw-bold text-primary">{{currCourse?.Description}}</span>
+                <span *ngIf="DescEditMode" class="fw-bold text-primary"><input [(ngModel)]="DescInput" type="text" class="form-control-sm " placeholder="Edit Course Description"></span>                
+            </span> 
+            <span >
+                <span *ngIf="!DescEditMode" class="btn btn-sm btn-outline-primary" (click)="handleDescEdit(currCourse?.Description)">
+                    Edit
+                </span>
+                <span *ngIf="DescEditMode">
+                    <span  class="btn btn-sm btn-outline-danger" (click)="handleDescCancel()">
+                        Cancel
+                    </span>
+                    <span  class="btn btn-sm btn-outline-success" (click)="handleDescEditSave(currCourse?.CID)">
+                        Update
+                    </span>
+                </span>
+            </span> 
+        </p>
+    </div>
+    
+</div>

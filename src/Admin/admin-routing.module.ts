@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { CourseCRUDComponent } from './course-crud/course-crud.component';
+import { StudentCRUDComponent } from './student-crud/student-crud.component';
+import { FacultyCRUDComponent } from './faculty-crud/faculty-crud.component';
+import { ManageCourseComponent } from './manage-course/manage-course.component';
 
 const routes: Routes = [
   {
@@ -13,8 +16,16 @@ const routes: Routes = [
         component:CourseCRUDComponent,
       },
       {
-        path:':CID',
-        component:CourseCRUDComponent
+        path:'students',
+        component:StudentCRUDComponent
+      },
+      {
+        path:'faculties',
+        component:FacultyCRUDComponent
+      },
+      {
+        path:'courses/:CID',
+        component:ManageCourseComponent
       }
     ]
   },

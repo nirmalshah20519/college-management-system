@@ -8,16 +8,16 @@
             <div class="collapse navbar-collapse d-flex justify-content-between px-4" id="navbarID">
                 <div class="d-flex justify-content-start">                
                     <div class="navbar-nav">
-                        <a class="nav-link active" routerLink="/admin" >Home</a>
+                        <a class="nav-link" routerLink="/admin">Home</a>
                     </div>
                     <div class="navbar-nav">
-                        <a class="nav-link"  >Students</a>
+                        <a class="nav-link" routerLink="./students" routerLinkActive="text-light h2">Student</a>
                     </div>
                     <div class="navbar-nav">
-                        <a class="nav-link"  >Faculty</a>
+                        <a class="nav-link" routerLink="./faculties" routerLinkActive="text-light h2">Faculty</a>
                     </div>
                     <div class="navbar-nav">
-                        <a class="nav-link" routerLink="./courses" routerLinkActive="text-light h2 " >Course</a>
+                        <a class="nav-link" routerLink="./courses" (click)="setCurrSub(undefined)" routerLinkActive="text-light h2 " >Course <span class="h6 text-warning" *ngIf="CurrCourse!==undefined">({{CurrCourse}})</span> </a>
                     </div>
                 </div>
                 <div class="navbar-nav">

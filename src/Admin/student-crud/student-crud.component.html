@@ -1,0 +1,110 @@
+<!-- Button trigger modal -->
+<div class="container p-4">
+
+
+    <button type="button" (click)="setFlag(false)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#studentModal">
+        Add Student
+    </button>
+    <ng-container *ngIf="studentlist.length else nostudent">
+        <div class="table-responsive px-5 w-100">
+            <table class="table table-striped table-hover table-borderless table-primary align-middle">
+            <caption></caption>
+                <thead class="table-light">
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Login ID</th>
+                        <th>Gender</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider" *ngFor="let s of studentlist">
+                        <tr class="table-info" >
+                            <td>{{s.SID}}</td>
+                            <td>{{s.Name}}</td>
+                            <td>{{s.Email}}</td>
+                            <td>{{getLoginID(s.SID)}}</td>
+                            <td>{{s.Gender==='male'?'M':'F'}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-sm btn-warning me-2"  data-bs-toggle="modal" data-bs-target="#studentModal" (click)="handleUpdateStudent(s)" >Update</a>
+                                    <a class="btn btn-sm btn-danger" (click)="handleDelete(s)" >Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    </ng-container>
+    <ng-template #nostudent>
+        <p class="display-1 text-center">No Student Found</p>
+    </ng-template>
+    
+    
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form [formGroup]="Student">
+                <div class="modal-header">
+                    <h5 *ngIf="!addUpdateFlag" class="modal-title" id="exampleModalLabel">Add Student</h5>
+                    <h5 *ngIf="addUpdateFlag" class="modal-title" id="exampleModalLabel">Update Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                        <div class=" d-flex justify-content-between mb-3">
+                                <div>
+                                    <label for="" class="form-label">First Name</label>
+                                    <input type="text" [readOnly]="addUpdateFlag"
+                                    class="form-control" formControlName="firstName" aria-describedby="helpId" placeholder="First Name">
+                                    <small *ngIf="Student.get('firstName')?.errors?.['required'] && Student.get('firstName')?.touched" class="form-text text-danger">* First Name is required</small>
+                                </div>
+                                
+                                <div>
+                                    <label for="" class="form-label">Last Name</label>
+                                    <input type="text" [readOnly]="addUpdateFlag"
+                                    class="form-control" formControlName="lastName" aria-describedby="helpId" placeholder="Last Name">
+                                    <small *ngIf="Student.get('lastName')?.errors?.['required'] && Student.get('lastName')?.touched" class="form-text text-danger">* Last Name is required</small>
+                                </div>
+                        </div>
+                          <div class="mb-3">
+                              <label for="" class="form-label">Email</label>
+                              <input rows="5" type="text"
+                                class="form-control" formControlName="Email" aria-describedby="helpId" placeholder="Email">
+                              <small *ngIf="Student.get('Email')?.errors?.['required'] && Student.get('Email')?.touched" class="form-text text-danger">* Email is required</small>
+                              <small *ngIf="Student.get('Email')?.errors?.['email'] && Student.get('Email')?.touched" class="form-text text-danger">* Please Enter Valid Email</small>
+                        </div>
+
+                        <p>Gender</p>
+                        <div class=" d-flex mb-3">
+                            <div class="me-3">                                
+                                <input type="radio" value="male"
+                                class="form-check-input" formControlName="Gender">
+                                <label for="" class="form-check-label">Male</label>                                
+                            </div>
+
+                            <div>                                
+                                <input type="radio" value="female"
+                                class="form-check-input" formControlName="Gender">
+                                <label for="" class="form-check-label">Female</label>                                
+                            </div>
+                            
+                        </div>
+
+                        
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button *ngIf="!addUpdateFlag" [disabled]="Student.invalid" type="button" class="btn btn-primary" (click)="addStudent()" data-bs-dismiss="modal" >Save changes</button>
+                    <button *ngIf="addUpdateFlag" [disabled]="Student.invalid" type="button" class="btn btn-warning" (click)="updateStudent()" data-bs-dismiss="modal" >Update changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    
