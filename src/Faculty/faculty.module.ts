@@ -15,6 +15,7 @@ import { FacultynamePipe } from './Pipes/facultyname.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { ScoreComponent } from './score/score.component';
+import { StudentnamePipe } from './Pipes/studentname.pipe';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ScoreComponent } from './score/score.component';
     CoursenamePipe,
     FacultynamePipe,
     AttendanceComponent,
-    ScoreComponent
+    ScoreComponent,
+    StudentnamePipe
   ],
   imports: [
     CommonModule,

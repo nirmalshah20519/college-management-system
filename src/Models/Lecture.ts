@@ -1,12 +1,12 @@
 export interface Attendance{
     SID:number,
-    Status:boolean|undefined
+    Status:boolean|null
 }
 
 export class AttendanceClass implements Attendance{
     public constructor(
         public SID:number,
-        public Status:boolean|undefined
+        public Status:boolean|null
     ){}
 }
 

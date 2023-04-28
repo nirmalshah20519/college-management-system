@@ -1,12 +1,12 @@
 export interface Score{
     SID:number,
-    Score:number|undefined
+    Score:number|null
 }
 
 export class ScoreClass implements Score{
     public constructor(
         public SID:number,
-        public Score:number|undefined
+        public Score:number|null
     ){}
 }
 

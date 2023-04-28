@@ -74,7 +74,7 @@ export class ExamsComponent {
   onSchedule(){
     let students:Score[]=[];
     this.serv.CourseList.find(c=>c.CID===this.currCourse)?.EnrolledStudents.forEach(stu=>{
-      students.push(new ScoreClass(stu,undefined))
+      students.push(new ScoreClass(stu,null))
     });
     let id=this.serv.EID
     this.serv.scheduleNewExam(new ExamClass(id, this.currCourse,this.Schedule,this.Topic, this.TotalMarks ,students))

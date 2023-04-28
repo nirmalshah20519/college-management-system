@@ -1,3 +1,39 @@
 <div class="container">
-    <p>attendance works!</p>
+    <ng-container *ngIf="Lectures.length===0">
+        <p>No Lectures Found</p>
+    </ng-container>
+    <ng-container *ngIf="Lectures.length!==0">
+        <table class="table table-striped-columns">
+            <caption></caption>
+            <thead>
+                <tr class="row table-primary">
+                    <th class="col-6 display-4 text-center">Select student</th>
+                    <th class="col-6">
+                            <label for="select">Select Lecture :</label>
+                            <select id="select" class="form-select form-select-sm" [(ngModel)]="currLecture">
+                                <option selected>Select one</option>
+                                <ng-container *ngFor="let lec of Lectures">
+                                    <option [value]="lec.LID">
+                                        Lecture {{lec.LID}} : <span class="text-primary">{{lec.Topic}} - ({{lec.Schedule|date:"mediumDate"}})</span>
+                                    </option>
+                                </ng-container>
+                            </select>
+                    </th>
+                </tr>
+            </thead>
+            <ng-container *ngIf="Students!==undefined">
+                <tbody *ngFor="let atten of Students">
+                    <tr class="row">
+                        <td class="col-6">{{atten.SID | studentname}}</td>
+                        <td class="col-6">
+                            <input class="form-check-input" type="checkbox" [checked]="atten.Status" (change)="updateAttend(atten)" [(ngModel)]="attendanceData[atten.SID]" value="" id="">
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-container>
+        </table>
+        <p> {{currLecture}} </p>
+        <p> {{Students|json}} </p>
+        <p> {{Lectures|json}} </p>
+    </ng-container>
 </div>

@@ -21,8 +21,11 @@ export class NavbarComponent {
       Password:["",[Validators.required]]
     });
 
-    this.serv.login('nirmal.shah', '654321');
-    this.navigateByRole('nirmal.shah');
+    // this.serv.login('nirmal.shah', '654321');
+    // this.navigateByRole('nirmal.shah');
+    
+    // this.serv.login('admin', 'admin');
+    // this.navigateByRole('admin');
   }
 
   get userID(){

@@ -118,12 +118,7 @@ export class ManageCourseComponent {
 
   AddStu(Stu:Student){
     if(this.currCourse?.CID!==undefined){
-    Stu.CoursesEnrolled.push(this.currCourse?.CID);
-    let sindex=this.serv.StudentList.findIndex(s=>s===Stu);
-    this.serv.StudentList[sindex]=Stu;
-    let cindex=this.serv.CourseList.findIndex(c=>c===this.currCourse);
-    this.currCourse?.EnrolledStudents.push(Stu.SID);
-    this.serv.CourseList[cindex]=this.currCourse;
+      this.serv.enrollStudent(Stu,this.currCourse);
     }
   }
 

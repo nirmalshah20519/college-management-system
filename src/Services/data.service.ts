@@ -45,13 +45,18 @@ export class DataService {
     this.AddFac(4,1);
     this.AddFac(4,2);
 
+    // this.enrollStudent(this.StudentList[0],this.CourseList[0]);
+    // this.enrollStudent(this.StudentList[1],this.CourseList[0]);
+    // this.enrollStudent(this.StudentList[2],this.CourseList[0]);
+    // this.enrollStudent(this.StudentList[3],this.CourseList[0]);
 
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Basics of JS',[]))
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Let, Const Var',[]))
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Callbacks & Promises',[]))
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Data Binding',[]))
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'SetTimeOut',[]))
-    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'API Call',[]))
+
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Basics of JS',[]))
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Let, Const Var',[]))
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Callbacks & Promises',[]))
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Data Binding',[]))
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'SetTimeOut',[]))
+  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'API Call',[]))
    }
 
    addUser(usrID:string, Passwd:string, Role:number){
@@ -167,6 +172,15 @@ export class DataService {
    getAssignedFaculty(CID:number){
     let alreadyAssigned=this.CourseList.find(c=>c.CID===CID)?.FacultiesAssigned;
     return this.FacultyList.filter(f=>alreadyAssigned?.includes(f.FID))
+   }
+
+   enrollStudent(Stu:Student, course:Course){
+    let sindex=this.StudentList.findIndex(s=>s===Stu);
+    let cindex=this.CourseList.findIndex(c=>c===course);
+    Stu.CoursesEnrolled.push(course.CID);
+    course.EnrolledStudents.push(Stu.SID);
+    this.StudentList[sindex]=Stu;
+    this.CourseList[cindex]=course;
    }
 
    scheduleNewLecture(lec:Lecture){

@@ -67,7 +67,7 @@ export class LecturesComponent {
   onSchedule(){
     let students:Attendance[]=[];
     this.serv.CourseList.find(c=>c.CID===this.currCourse)?.EnrolledStudents.forEach(stu=>{
-      students.push(new AttendanceClass(stu,undefined))
+      students.push(new AttendanceClass(stu,null))
     });
     let id=this.serv.LID
     this.serv.scheduleNewLecture(new LectureClass(id, this.currCourse,this.Schedule,this.Topic,students))
