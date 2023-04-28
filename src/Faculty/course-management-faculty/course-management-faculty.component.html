@@ -22,12 +22,30 @@
       </button>
       <button
         type="button"
+        routerLink="./attendance"
+        [queryParams]="{ CID: currCID }"
+        routerLinkActive="bg-dark text-light"
+        class="btn btn-outline-dark"
+      >
+        Attendance
+      </button>
+      <button
+        type="button"
         routerLink="./exams"
         [queryParams]="{ CID: currCID }"
         routerLinkActive="bg-dark text-light"
         class="btn btn-outline-dark"
       >
         Exams
+      </button>
+      <button
+        type="button"
+        routerLink="./score"
+        [queryParams]="{ CID: currCID }"
+        routerLinkActive="bg-dark text-light"
+        class="btn btn-outline-dark"
+      >
+        Scores
       </button>
     </div>
   </div>

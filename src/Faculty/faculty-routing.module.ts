@@ -6,6 +6,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LecturesComponent } from './lectures/lectures.component';
 import { ExamsComponent } from './exams/exams.component';
 import { FacultyLandingComponent } from './faculty-landing/faculty-landing.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { ScoreComponent } from './score/score.component';
 
 const routes: Routes = [
   {
@@ -29,8 +31,16 @@ const routes: Routes = [
             component:LecturesComponent
           },
           {
+            path:'attendance',
+            component:AttendanceComponent
+          },
+          {
             path:'exams',
             component:ExamsComponent
+          },
+          {
+            path:'score',
+            component:ScoreComponent
           }
         ]
       }

@@ -13,6 +13,8 @@ import { FullnamePipe } from './Pipes/fullname.pipe';
 import { CoursenamePipe } from './Pipes/coursename.pipe';
 import { FacultynamePipe } from './Pipes/facultyname.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { ScoreComponent } from './score/score.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FacultyLandingComponent,
     FullnamePipe,
     CoursenamePipe,
-    FacultynamePipe
+    FacultynamePipe,
+    AttendanceComponent,
+    ScoreComponent
   ],
   imports: [
     CommonModule,

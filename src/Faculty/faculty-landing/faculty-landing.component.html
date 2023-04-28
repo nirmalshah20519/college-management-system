@@ -15,7 +15,8 @@
 
 </div>
 
-<div class="container overflow-auto h-100 " id="noscrollbar">
+<div class="container overflow-auto " id="noscrollbar" style="height: 75%;">
+    
     <p class="display-4">Scheduled Lectures </p>
     <div id="lecturecards" class="container p-4 " >
         <ng-container *ngIf="Lectures.length!==0;else noCourse">
@@ -39,6 +40,7 @@
         
     </div>    
 
+
     <p class="display-4">Scheduled Exams </p>
     <div id="lecturecards" class="container p-4 ">
         <ng-container *ngIf="Exams.length!==0;else noCourse">
@@ -61,49 +63,6 @@
         </ng-template>
         
     </div>
+
+    
 </div>
-
-    <!-- <div id="lecturecards" class="container p-4 " style="height: 100%;">
-        <ng-container *ngIf="Lectures.length!==0;else noCourse">
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <ng-container *ngFor="let l of Lectures">
-                <div class="col">
-                <div class="card h-100 rounded-4" id="leccard">
-                    <img src="https://res.cloudinary.com/dadhpdkco/image/upload/v1682681042/CMS/lecture_hykote.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title"> Lecture {{l.LID}} : <span class="text-primary fw-semibold">{{l.Topic}}</span></h5>
-                    <p class="card-text"> Scheduled on <span class="text-primary fw-semibold"> {{l.Schedule | date : "mediumDate"}} </span> at <span class="text-primary fw-semibold"> {{l.Schedule | date : "shortTime"}} </span> </p>
-                    </div>
-                </div>
-                </div>
-            </ng-container>
-            </div>
-        </ng-container>
-        <ng-template #noCourse>
-            <p class="text-center h3">Hii, <span class="text-primary">{{CurrentUser.UserID}}</span> No Lectures Scheduled.</p>
-        </ng-template>
-        
-    </div>
-
-    <div id="lecturecards" class="container p-4 h-100 overflow-scroll">
-        <ng-container *ngIf="Exams.length!==0;else noCourse">
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <ng-container *ngFor="let e of Exams">
-                <div class="col">
-                <div class="card h-100 rounded-4" id="leccard">
-                    <img src="https://res.cloudinary.com/dadhpdkco/image/upload/v1682685696/CMS/OIP_sjgq5d.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title"> Exam {{e.EID}} : <span class="text-primary fw-semibold">{{e.Topic}}</span></h5>
-                    <p class="card-text"> Scheduled on <span class="text-primary fw-semibold"> {{e.Schedule | date : "mediumDate"}} </span> at <span class="text-primary fw-semibold"> {{e.Schedule | date : "shortTime"}} </span> </p>
-                    </div>
-                </div>
-                </div>
-            </ng-container>
-            </div>
-        </ng-container>
-        <ng-template #noCourse>
-            <p class="text-center h3">Hii, <span class="text-primary">{{CurrentUser.UserID}}</span> No Exams Scheduled.</p>
-        </ng-template>
-        
-    </div>
- -->
