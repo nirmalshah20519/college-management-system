@@ -21,8 +21,8 @@ export class NavbarComponent {
       Password:["",[Validators.required]]
     });
 
-    this.serv.login('admin', 'admin');
-    this.navigateByRole('admin');
+    // this.serv.login('nirmal.shah', '654321');
+    // this.navigateByRole('nirmal.shah');
   }
 
   get userID(){
@@ -40,14 +40,13 @@ handleModal(messageObj:Message, flag:boolean|null){
                     if(flag===true){
                       this.navigateByRole(this.userID);
                       this.Login.reset();
-                    }},2500);
+                    }},2000);
 }
 
   handleLogin(){
     let flag=this.serv.login(this.userID, this.Password);
     switch(flag){
-      case true: this.handleModal(new MessageClass(`Welcome back ${this.userID}!`,`Hii ${this.userID}, Great to see you back Online`,'modal-header bg-success'), flag)
-        
+      case true: this.handleModal(new MessageClass(`Welcome back ${this.userID}!`,`Hii ${this.userID}, Great to see you back Online`,'modal-header bg-success text-light'), flag)        
                   break;
       case false: this.handleModal(new MessageClass(`Wrong Password`,`Hii ${this.userID}, The Password You entered is wrong please try again with right password`,'modal-header bg-danger'), flag);
                   break;
@@ -61,9 +60,9 @@ handleModal(messageObj:Message, flag:boolean|null){
     let role=this.serv.getRoleByUserID(id)
     console.log(role);
     switch(role){
-      case 1: this.rt.navigate(['/admin'])
+      case 1: this.rt.navigate(['/admin/home'])
               break;
-      case 2: this.rt.navigate(['/faculty'])
+      case 2: this.rt.navigate(['/faculty/courses'])
               break;
       case 3: this.rt.navigate(['/student'])
               break;

@@ -3,7 +3,7 @@ export interface Course{
     Name:string,
     Description:string,
     EnrolledStudents:number[],
-    FacultiesAssigned:number[]
+    FacultiesAssigned:number[],
 }
 
 export class CourseClass implements Course{

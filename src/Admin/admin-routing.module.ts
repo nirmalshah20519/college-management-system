@@ -5,12 +5,17 @@ import { CourseCRUDComponent } from './course-crud/course-crud.component';
 import { StudentCRUDComponent } from './student-crud/student-crud.component';
 import { FacultyCRUDComponent } from './faculty-crud/faculty-crud.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
   {
     path:"",
     component:AdminHomeComponent,
     children:[
+      {
+        path:"home",
+        component:HomePageComponent,
+      },
       {
         path:"courses",
         component:CourseCRUDComponent,

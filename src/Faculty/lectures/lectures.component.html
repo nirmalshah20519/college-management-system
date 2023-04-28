@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-6">
+            <div class="border border-primary rounded-2">
+                <p class="bg-primary h2 p-3 text-light fw-semibold rounded-top">Schedule Lecture</p>
+                <form [formGroup]="Lecture" class="bg-light rounded-3 p-4">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Topic</label>
+                        <input type="text"
+                            class="form-control" 
+                            formControlName="Topic" 
+                            placeholder="Enter Lecture Topic">
+                        <small *ngIf="(Lecture.get('Topic')?.touched||Lecture.get('Topic')?.dirty) && (Lecture.get('Topic')?.errors?.['required'])" 
+                               class="form-text text-danger">
+                            * Lecture Topic is required
+                        </small>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="" class="form-label">Schedule</label>
+                        <input type="datetime-local"
+                            [min]="Date"
+                            class="form-control" 
+                            formControlName="Schedule" 
+                            placeholder="Enter Lecture Topic">
+                        <small *ngIf="(Lecture.get('Schedule')?.touched||Lecture.get('Schedule')?.dirty) && (Lecture.get('Schedule')?.errors?.['required'])" 
+                               class="form-text text-danger">
+                            * Lecture Schedule is required
+                        </small>
+                        <small *ngIf="(Lecture.get('Schedule')?.touched||Lecture.get('Schedule')?.dirty) && (Lecture.get('Schedule')?.errors?.['dateInvalid'])" 
+                               class="form-text text-danger">
+                            * Lecture Schedule Date and time must be after now
+                        </small>
+                    </div>
+                    <div>
+                        <button *ngIf="!editUpdFlag" class="btn btn-primary btn-sm" [disabled]="Lecture.invalid" (click)="onSchedule()" role="button"> Schedule </button>
+                        <button *ngIf="editUpdFlag" class="btn btn-outline-primary btn-sm" [disabled]="Lecture.invalid" (click)="onUpdate()" role="button"> Update </button>
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+        <div class="col-6">
+            <ng-container *ngIf="Lectures.length!==0;else noLec">
+                <div *ngFor="let lec of Lectures;let i=index;">                    
+                        <div class="accordion mb-2" [id]="'acc'+lec.LID">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button [id]="'btn-'+lec.LID" class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#acc-col-'+lec.LID" [attr.aria-expanded]="false" [attr.aria-controls]="'acc-col-'+lec.LID">
+                                Lecture {{lec.LID}}: <span class="text-primary">{{lec.Topic}}</span>
+                              </button>
+                            </h2>
+                            <div [id]="'acc-col-'+lec.LID" class="accordion-collapse collapse" aria-labelledby="headingOne" [attr.data-bs-parent]="'#acc'+lec.LID">
+                              <div class="accordion-body">
+                                <p>
+                                    Lecture {{lec.LID}}: <span class="text-primary"> {{lec.Topic}} </span> 
+                                </p>
+                                <p>
+                                    Scheduled on: <span class="text-primary"> {{lec.Schedule | date :"mediumDate"}} </span>  at <span class="text-primary"> {{lec.Schedule | date :"shortTime"}} </span>
+                                </p>
+
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-primary btn-sm me-2" (click)="onEditLecture(lec)" role="button">Edit</button>
+                                    <button class="btn btn-outline-danger btn-sm " (click)="onDeleteLecture(lec)" role="button">Delete</button>
+                                </div>
+                                                               
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                </div>
+            </ng-container>
+            <ng-template #noLec>
+                <p class="h3 text-warning text-center">
+                    No Lectures Scheduled
+                </p>
+            </ng-template>
+        </div>
+    </div>
+</div>

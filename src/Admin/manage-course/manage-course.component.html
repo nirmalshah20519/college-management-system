@@ -58,15 +58,15 @@
                     </tr>                
                 </thead>
                 <tbody class="table-success">
-                    <ng-container *ngIf="currCourse?.FacultiesAssigned?.length===0 else facList">
-                        <tr>
+                    <ng-container *ngIf="AssignedFaculty.length===0 else facList">
+                        <tr class="table-danger">
                             <td>No Faculty Assigned</td>
                         </tr>
                     </ng-container>
                     <ng-template #facList>
-                        <ng-container *ngFor="let f of currCourse?.FacultiesAssigned">
+                        <ng-container *ngFor="let f of AssignedFaculty">
                             <tr>
-                                <td>{{getFacultyByID(f)?.Name}}</td>
+                                <td>{{f.Name}}</td>
                             </tr>
                         </ng-container>
                     </ng-template>
@@ -102,7 +102,7 @@
                 </thead>
                 <tbody class="table-success">
                     <ng-container *ngIf="getEnrolledStudents().length===0 else StuList">
-                        <tr>
+                        <tr class="table-danger">
                             <td>No Student Enrolled</td>
                         </tr>
                     </ng-container>

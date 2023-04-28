@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminGuard } from './admin.guard';
+import { FacultyGuard } from './faculty.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   {
     path:"faculty", 
     loadChildren: () => import('../Faculty/faculty.module').then(f => f.FacultyModule),
+    canActivate:[FacultyGuard]
   },
   {
     path:"student",

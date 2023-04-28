@@ -8,20 +8,20 @@
             <div class="collapse navbar-collapse d-flex justify-content-between px-4" id="navbarID">
                 <div class="d-flex justify-content-start">                
                     <div class="navbar-nav">
-                        <a class="nav-link" routerLink="/admin">Home</a>
+                        <a class="nav-link" routerLink="./home" (click)="setCurrSub(undefined)" routerLinkActive="text-light h2">Home</a>
                     </div>
                     <div class="navbar-nav">
-                        <a class="nav-link" routerLink="./students" routerLinkActive="text-light h2">Student</a>
+                        <a class="nav-link" routerLink="./students" (click)="setCurrSub(undefined)" routerLinkActive="text-light h2">Student</a>
                     </div>
                     <div class="navbar-nav">
-                        <a class="nav-link" routerLink="./faculties" routerLinkActive="text-light h2">Faculty</a>
+                        <a class="nav-link" routerLink="./faculties" (click)="setCurrSub(undefined)" routerLinkActive="text-light h2">Faculty</a>
                     </div>
                     <div class="navbar-nav">
                         <a class="nav-link" routerLink="./courses" (click)="setCurrSub(undefined)" routerLinkActive="text-light h2 " >Course <span class="h6 text-warning" *ngIf="CurrCourse!==undefined">({{CurrCourse}})</span> </a>
                     </div>
                 </div>
                 <div class="navbar-nav">
-                    <a class="btn btn-sm btn-danger" (click)="handleLogout()" aria-current="page" >LogOut</a>
+                    <a class="btn btn-sm btn-danger" (click)="handleLogout()" aria-current="page" >LogOut <small class="fw-bold text-warning">({{CurrentUser.UserID}})</small>  </a>
                 </div>
             </div>
         </div>

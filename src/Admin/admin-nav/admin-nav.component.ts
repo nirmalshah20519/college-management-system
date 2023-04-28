@@ -14,6 +14,7 @@ export class AdminNavComponent {
   }
 
   handleLogout(){
+    this.setCurrSub(undefined)
     this.rt.navigateByUrl('/')
     this.serv.CurrentUser={} as User;
     console.log(this.serv.CurrentUser);
@@ -25,6 +26,10 @@ export class AdminNavComponent {
 
   setCurrSub(subName:string|undefined){
     this.serv.currSub=subName
+  }
+
+  get CurrentUser(){
+    return this.serv.CurrentUser
   }
 
 }

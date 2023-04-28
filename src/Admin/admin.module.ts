@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudentCRUDComponent } from './student-crud/student-crud.component';
 import { FacultyCRUDComponent } from './faculty-crud/faculty-crud.component';
 import { ManageCourseComponent } from './manage-course/manage-course.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ManageCourseComponent } from './manage-course/manage-course.component';
     CourseCRUDComponent,
     StudentCRUDComponent,
     FacultyCRUDComponent,
-    ManageCourseComponent
+    ManageCourseComponent,
+    HomePageComponent
   ],
   imports: [
     CommonModule,

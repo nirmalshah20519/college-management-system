@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-6">
+            <div class="border border-primary rounded-2">
+                <p class="bg-primary h2 p-3 text-light fw-semibold rounded-top">Schedule Exam</p>
+                <form [formGroup]="Exam" class="bg-light rounded-3 p-4">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Topic</label>
+                        <input type="text"
+                            class="form-control" 
+                            formControlName="Topic" 
+                            placeholder="Enter Exam Topic">
+                        <small *ngIf="(Exam.get('Topic')?.touched||Exam.get('Topic')?.dirty) && (Exam.get('Topic')?.errors?.['required'])" 
+                               class="form-text text-danger">
+                            * Exam Topic is required
+                        </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Total Marks </label>
+                        <input type="number"
+                            class="form-control" 
+                            formControlName="TotalMarks" 
+                            placeholder="Enter Total Marks">
+                        <small *ngIf="(Exam.get('TotalMarks')?.touched||Exam.get('TotalMarks')?.dirty) && (Exam.get('TotalMarks')?.errors?.['required'])" 
+                               class="form-text text-danger">
+                            * Total Marks is required
+                        </small>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="" class="form-label">Schedule</label>
+                        <input type="datetime-local"
+                            [min]="Date"
+                            class="form-control" 
+                            formControlName="Schedule" 
+                            placeholder="Enter Exam Topic">
+                        <small *ngIf="(Exam.get('Schedule')?.touched||Exam.get('Schedule')?.dirty) && (Exam.get('Schedule')?.errors?.['required'])" 
+                               class="form-text text-danger">
+                            * Exam Schedule is required
+                        </small>
+                        <small *ngIf="(Exam.get('Schedule')?.touched||Exam.get('Schedule')?.dirty) && (Exam.get('Schedule')?.errors?.['dateinvalid'])" 
+                               class="form-text text-danger">
+                            * Exam Schedule Date and time must be after now
+                        </small>
+                    </div>
+                    <div>
+                        <button *ngIf="!editUpdFlag" class="btn btn-primary btn-sm" [disabled]="Exam.invalid" (click)="onSchedule()" role="button"> Schedule </button>
+                        <button *ngIf="editUpdFlag" class="btn btn-outline-primary btn-sm" [disabled]="Exam.invalid" (click)="onUpdate()" role="button"> Update </button>
+                    </div>
+                </form>
+
+            </div>
+            
+        </div>
+        <div class="col-6">
+            <ng-container *ngIf="Exams.length!==0;else noexam">
+                <div *ngFor="let exam of Exams;let i=index;">                    
+                        <div class="accordion mb-2" [id]="'acc'+exam.EID">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button [id]="'btn-'+exam.EID" class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#acc-col-'+exam.EID" [attr.aria-expanded]="false" [attr.aria-controls]="'acc-col-'+exam.EID">
+                                Exam {{exam.EID}}: <span class="text-primary">{{exam.Topic}}</span>
+                              </button>
+                            </h2>
+                            <div [id]="'acc-col-'+exam.EID" class="accordion-collapse collapse" aria-labelledby="headingOne" [attr.data-bs-parent]="'#acc'+exam.EID">
+                              <div class="accordion-body">
+                                <p>
+                                    Exam {{exam.EID}}: <span class="text-primary"> {{exam.Topic}} </span> 
+                                </p>
+                                <p>
+                                    Scheduled on: <span class="text-primary"> {{exam.Schedule | date :"mediumDate"}} </span>  at <span class="text-primary"> {{exam.Schedule | date :"shortTime"}} </span>
+                                </p>
+
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-outline-primary btn-sm me-2" (click)="onEditExam(exam)" role="button">Edit</button>
+                                    <button class="btn btn-outline-danger btn-sm " (click)="onDeleteExam(exam)" role="button">Delete</button>
+                                </div>
+                                                               
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                </div>
+            </ng-container>
+            <ng-template #noexam>
+                <p class="h3 text-warning text-center">
+                    No Exams Scheduled
+                </p>
+            </ng-template>
+        </div>
+    </div>
+</div>

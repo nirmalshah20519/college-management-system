@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-dark">
+    <div class="container">
+        <a class="navbar-brand text-light h1" routerLink="/faculty/courses">CMS <span class="fst-italic h6 text-warning">Faculty Panel</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+            aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end px-4" id="navbarID">
+            
+            <div class="navbar-nav">
+                <a class="btn btn-sm btn-danger" (click)="handleLogout()" aria-current="page" >LogOut <small class="fw-bold text-warning">({{CurrentUser.UserID}})</small> </a>
+            </div>
+        </div>
+    </div>
+</nav>

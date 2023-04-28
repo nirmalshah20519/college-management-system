@@ -26,7 +26,6 @@ export class ManageCourseComponent {
         this.currCID=Number(cid);
         this.currCourse=serv.CourseList.find(c=>c.CID===Number(cid))
       }
-      console.log(this.currCID);
     })
     this.serv.FacultyList.forEach(f=>{
       if(!this.currCourse?.FacultiesAssigned.includes(f.FID)){
@@ -91,20 +90,11 @@ export class ManageCourseComponent {
   }
 
   AddFac(){
-    let fac=this.serv.FacultyList.find(f=>f.FID===Number(this.currFaculty));
-    let findex=this.serv.FacultyList.findIndex(f=>f.FID===this.currFaculty);
-    let cindex=this.serv.CourseList.findIndex(c=>c===this.currCourse);
-    if(findex!==-1 && this.currCourse?.CID!==undefined && fac!== undefined){
-      fac?.CoursesTaking.push(this.currCourse?.CID);
-      this.serv.FacultyList[findex]=fac;
+    if(this.currCourse?.CID!==undefined){
+      console.log(this.currFaculty,this.currCourse?.CID);
+      this.serv.AddFac(Number(this.currFaculty),Number(this.currCourse?.CID));      
+      this.AvailableFaculty=this.serv.getAvailableFaculty(this.currCourse?.CID)
     }
-    if(cindex!==-1 && fac!== undefined && this.currCourse!==undefined){
-      this.currCourse?.FacultiesAssigned.push(fac?.FID);
-      this.serv.CourseList[cindex]=this.currCourse
-    }
-
-    this.AvailableFaculty=this.AvailableFaculty.filter(af=>af.FID!==fac?.FID)
-
   }
 
   getEnrolledStudents(){    
@@ -122,12 +112,19 @@ export class ManageCourseComponent {
     return this.serv.StudentList.filter(s=>!this.getEnrolledStudents().includes(s))    
   }
 
-  AddStu(Stu:Student){
-    if(this.currCourse?.CID!==undefined)
-    Stu.CoursesEnrolled.push(this.currCourse?.CID);
+  get AssignedFaculty(){
+    return this.serv.getAssignedFaculty(this.currCID)
+  }
 
+  AddStu(Stu:Student){
+    if(this.currCourse?.CID!==undefined){
+    Stu.CoursesEnrolled.push(this.currCourse?.CID);
     let sindex=this.serv.StudentList.findIndex(s=>s===Stu);
     this.serv.StudentList[sindex]=Stu;
+    let cindex=this.serv.CourseList.findIndex(c=>c===this.currCourse);
+    this.currCourse?.EnrolledStudents.push(Stu.SID);
+    this.serv.CourseList[cindex]=this.currCourse;
+    }
   }
 
 }

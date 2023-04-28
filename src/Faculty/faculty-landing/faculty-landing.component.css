@@ -1,0 +1,15 @@
+#leccard:hover{
+    box-shadow: 4px 4px 24px 8px rgba(0, 0, 0, 0.25);
+    transition-duration: 500ms;
+    scale: 1.01;
+}
+
+#noscrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+#noscrollbar{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

@@ -1,0 +1,21 @@
+<div id="coursecards" class="container p-4 h-100 overflow-scroll">
+    <ng-container *ngIf="getCoursesByCurrentFaculty().length!==0;else noCourse">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <ng-container *ngFor="let c of getCoursesByCurrentFaculty()">
+            <div class="col" [routerLink]="'./'+c.CID+'/landing'" [queryParams]="{'CID':c.CID}">
+            <div class="card h-100 rounded-4" id="coursecard">
+                <img src="https://res.cloudinary.com/dadhpdkco/image/upload/v1682589171/CMS/Course_igxmua.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{c.Name}}</h5>
+                <p class="card-text">{{c.Description}}</p>
+                </div>
+            </div>
+            </div>
+        </ng-container>
+        </div>
+    </ng-container>
+    <ng-template #noCourse>
+        <p class="text-center h3">Hii, <span class="text-primary">{{CurrentUser.UserID}}</span> You have not been assigned to any course yet.</p>
+    </ng-template>
+    
+</div>

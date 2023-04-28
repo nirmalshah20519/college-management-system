@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Course, CourseClass } from 'src/Models/Course';
+import { Exam } from 'src/Models/Exam';
 import { Faculty, tempFaculty, tempFacultyClass } from 'src/Models/Faculty';
+import { Lecture, LectureClass } from 'src/Models/Lecture';
 import { Role } from 'src/Models/Role';
 import { Student, tempStudent, tempStudentClass } from 'src/Models/Student';
 import { User, UserClass } from 'src/Models/User';
@@ -14,6 +16,8 @@ export class DataService {
   CourseList:Course[]=[];
   StudentList:Student[]=[];
   FacultyList:Faculty[]=[];
+  LectureList:Lecture[]=[];
+  ExamList:Exam[]=[];
   currSub!:string|undefined;
   setSub(sub:string){
     this.currSub=sub
@@ -37,6 +41,17 @@ export class DataService {
     this.addStudent(new tempStudentClass('Helen Norman','male','fi@vojaru.bs',[]))
     this.addStudent(new tempStudentClass('Seth Waters','male','ukezu@sajekdo.zm',[]))
     this.addStudent(new tempStudentClass('Dustin Farmer','male','pij@wehwertu.al',[]))
+
+    this.AddFac(4,1);
+    this.AddFac(4,2);
+
+
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Basics of JS',[]))
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Let, Const Var',[]))
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Callbacks & Promises',[]))
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Data Binding',[]))
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'SetTimeOut',[]))
+    this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'API Call',[]))
    }
 
    addUser(usrID:string, Passwd:string, Role:number){
@@ -59,7 +74,6 @@ export class DataService {
     });
     let tempUsr=new UserClass(id, usrID, passwd, Role.Student)
     this.UserList.push(tempUsr)
-    console.log(tempUsr);
    }
 
    addFaculty(facObj:tempFaculty){
@@ -74,7 +88,6 @@ export class DataService {
     });
     let tempUsr=new UserClass(id, usrID, passwd, Role.Faculty)
     this.UserList.push(tempUsr)
-    console.log(tempUsr);
    }
 
    get ID(){
@@ -83,6 +96,14 @@ export class DataService {
 
    get CID(){
     return this.CourseList.length===0?1:this.CourseList[this.CourseList.length-1].CID+1;
+   }
+
+   get LID(){
+    return this.LectureList.length===0?1:this.LectureList[this.LectureList.length-1].LID+1;
+   }
+
+   get EID(){
+    return this.ExamList.length===0?1:this.ExamList[this.ExamList.length-1].EID+1;
    }
 
    get AllUsers(){
@@ -94,7 +115,6 @@ export class DataService {
     if(usr){
       if(usr.Password===passwd){
         this.CurrentUser=usr;
-        console.log(this.CurrentUser);
         return true
       }
       else{
@@ -118,6 +138,43 @@ export class DataService {
       return usr.Role
     }
     return 0
+   }
+
+   AddFac(FID:number, CID:number){
+    let fac=this.FacultyList.find(f=>f.FID===FID)
+    let findex=this.FacultyList.findIndex(f=>f.FID===FID)
+    let course=this.CourseList.find(c=>c.CID===CID)
+    let cindex=this.CourseList.findIndex(c=>c.CID===CID)
+    if(cindex!==-1 && course!==undefined){
+      course.FacultiesAssigned.push(FID)
+      this.CourseList[cindex]=course;
+    }
+
+    if(findex!==-1 && fac!==undefined){
+      fac.CoursesTaking.push(CID)
+      this.FacultyList[findex]=fac;
+    }
+   }
+
+   getAvailableFaculty(CID:number){
+    let alreadyAssigned=this.CourseList.find(c=>c.CID===CID)?.FacultiesAssigned;
+    if(alreadyAssigned?.length!==0){
+      return this.FacultyList.filter(f=>!alreadyAssigned?.includes(f.FID))
+    }
+    return this.FacultyList
+   }
+
+   getAssignedFaculty(CID:number){
+    let alreadyAssigned=this.CourseList.find(c=>c.CID===CID)?.FacultiesAssigned;
+    return this.FacultyList.filter(f=>alreadyAssigned?.includes(f.FID))
+   }
+
+   scheduleNewLecture(lec:Lecture){
+    this.LectureList.push(lec)
+   }
+
+   scheduleNewExam(exam:Exam){
+    this.ExamList.push(exam)
    }
 
 
