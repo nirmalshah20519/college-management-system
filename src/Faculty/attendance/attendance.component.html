@@ -25,15 +25,14 @@
                 <tbody *ngFor="let atten of Students">
                     <tr class="row">
                         <td class="col-6">{{atten.SID | studentname}}</td>
-                        <td class="col-6">
-                            <input class="form-check-input" type="checkbox" [checked]="atten.Status" (change)="updateAttend(atten)" [(ngModel)]="attendanceData[atten.SID]" value="" id="">
+                        <td class="col-6 text-center">
+                            <input class="form-check-input" type="checkbox" (change)="updateAttend(atten)" [(ngModel)]="atten.Status" id="">
+                            <span *ngIf="atten.Status===true" class="w-auto text-center text-success">Present</span>
+                            <span *ngIf="atten.Status===false" class="w-auto text-center text-danger">Absent</span>
                         </td>
                     </tr>
                 </tbody>
             </ng-container>
         </table>
-        <p> {{currLecture}} </p>
-        <p> {{Students|json}} </p>
-        <p> {{Lectures|json}} </p>
     </ng-container>
 </div>

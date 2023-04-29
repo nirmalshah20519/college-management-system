@@ -1,4 +1,4 @@
-<div class="container p-2">
+<div id="noscroll" class="container p-2 h-75 overflow-auto">
     <div class="d-flex justify-content-between">
         <a routerLink="../" (click)="setCurrSub(undefined)" class="btn btn-sm btn-dark">Back</a>
         <a (click)="DeleteCourse()" class="btn btn-sm btn-danger">Delete Course</a>
@@ -48,7 +48,7 @@
             </span> 
         </p>
     </div>
-    <div class="row row-cols-2">
+    <div class="row row-cols-2 overflow-auto">
         <div class="container-fluid ">
             <table class="table table-bordered table-hover w-100 mx-auto">
                 <caption></caption>
@@ -92,7 +92,7 @@
             </table>
     
         </div>
-        <div class="container-fluid ">
+        <div class="container-fluid">
             <table class="table table-bordered table-hover w-100 mx-auto">
                 <caption></caption>
                 <thead class="table-primary">

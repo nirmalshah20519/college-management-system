@@ -36,11 +36,19 @@ export class DataService {
     this.addFaculty(new tempFacultyClass('Nirmal Shah','male','nirmal@gmail.com',[]))
     this.addFaculty(new tempFacultyClass('Vishal Chaudhary','male','vishal@gmail.com',[]))
 
-    this.addStudent(new tempStudentClass('Bradley Bell','male','ive@bafvu.bb',[]))
-    this.addStudent(new tempStudentClass('Andre Dennis','male','wudi@juttezsu.cy',[]))
-    this.addStudent(new tempStudentClass('Helen Norman','male','fi@vojaru.bs',[]))
-    this.addStudent(new tempStudentClass('Seth Waters','male','ukezu@sajekdo.zm',[]))
-    this.addStudent(new tempStudentClass('Dustin Farmer','male','pij@wehwertu.al',[]))
+    this.addStudent(new tempStudentClass('Bradley Bell','male','ive@bafvu.bb',[]));
+    this.addStudent(new tempStudentClass('Andre Dennis','male','wudi@juttezsu.cy',[]));
+    this.addStudent(new tempStudentClass('Helen Norman','female','fi@vojaru.bs',[]));
+    this.addStudent(new tempStudentClass('Seth Waters','male','ukezu@sajekdo.zm',[]));
+    this.addStudent(new tempStudentClass('Dustin Farmer','female','pij@wehwertu.al',[]));
+    this.addStudent(new tempStudentClass('Warren Rogers','female','huv@od.edu',[]));
+    this.addStudent(new tempStudentClass('Kevin Fisher','male','mezajuv@nokab.th',[]));
+    this.addStudent(new tempStudentClass('Jack Gonzalez','female','up@uzdad.az',[]));
+    this.addStudent(new tempStudentClass('Harriet Walters','male','movu@sa.zm',[]));
+    this.addStudent(new tempStudentClass('Andre Wallace','male','rid@lieg.mk',[]));
+    this.addStudent(new tempStudentClass('Sue Copeland','female','ratjuziz@ez.be',[]));
+    this.addStudent(new tempStudentClass('Lucinda Clarke','male','lafub@lak.nf',[]));
+    this.addStudent(new tempStudentClass('Mayme Smith','female','podwen@recbum.bf',[]));
 
     this.AddFac(4,1);
     this.AddFac(4,2);

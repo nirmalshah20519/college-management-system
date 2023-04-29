@@ -11,7 +11,7 @@ import { DataService } from 'src/Services/data.service';
 export class AttendanceComponent {
   currCID!:number;
   currLecture!:number;
-  attendanceData:(boolean|null)[]=[]
+  attendanceData:any={}
   constructor(private serv:DataService, private rt:ActivatedRoute){
     rt.queryParamMap.subscribe(c=>{
       this.currCID= Number(c.get('CID'))
@@ -34,7 +34,6 @@ export class AttendanceComponent {
     let index=this.serv.LectureList.findIndex(lec=>lec.LID===this.currLecture)
     let attend=this.serv.LectureList.find(lec=>lec.LID===this.currLecture)?.Attendance
     let aindex=attend?.findIndex(a=>a.SID===atten.SID)
-    atten.Status=this.attendanceData[atten.SID]
     if(attend && aindex){
     attend[aindex]=atten;
     this.serv.LectureList[index].Attendance=attend;
