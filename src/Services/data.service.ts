@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Course, CourseClass } from 'src/Models/Course';
 import { Exam } from 'src/Models/Exam';
 import { Faculty, tempFaculty, tempFacultyClass } from 'src/Models/Faculty';
-import { Lecture, LectureClass } from 'src/Models/Lecture';
+import { Attendance, AttendanceClass, Lecture, LectureClass } from 'src/Models/Lecture';
 import { Role } from 'src/Models/Role';
 import { Student, tempStudent, tempStudentClass } from 'src/Models/Student';
 import { User, UserClass } from 'src/Models/User';
@@ -34,7 +34,15 @@ export class DataService {
     this.addCourse('Typescript', ' unde soluta ipsum et consectetur voluptate iusto illum iure nihil voluptates placeat enim cupiditate libero.');
 
     this.addFaculty(new tempFacultyClass('Nirmal Shah','male','nirmal@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Hitesh Ahir','male','donahir@gmail.com',[]))
     this.addFaculty(new tempFacultyClass('Vishal Chaudhary','male','vishal@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Deepak Khatri','male','dk@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Bhautik Hirpara','male','bhit@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Jay Prajapati','male','jp@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Sibten Shekh','male','shekhultra@gmail.com',[]))
+    this.addFaculty(new tempFacultyClass('Eliza Guerrero','male','rom@mijfuleg.bz',[]))
+    this.addFaculty(new tempFacultyClass('Danny Harrington','male','ufadipow@tip.me',[]))
+
 
     this.addStudent(new tempStudentClass('Bradley Bell','male','ive@bafvu.bb',[]));
     this.addStudent(new tempStudentClass('Andre Dennis','male','wudi@juttezsu.cy',[]));
@@ -54,17 +62,38 @@ export class DataService {
     this.AddFac(4,2);
 
     // this.enrollStudent(this.StudentList[0],this.CourseList[0]);
-    // this.enrollStudent(this.StudentList[1],this.CourseList[0]);
     // this.enrollStudent(this.StudentList[2],this.CourseList[0]);
-    // this.enrollStudent(this.StudentList[3],this.CourseList[0]);
+    // this.enrollStudent(this.StudentList[6],this.CourseList[0]);
+    // this.enrollStudent(this.StudentList[4],this.CourseList[0]);
 
+    // this.enrollStudent(this.StudentList[7],this.CourseList[1]);
+    // this.enrollStudent(this.StudentList[1],this.CourseList[1]);
+    // this.enrollStudent(this.StudentList[5],this.CourseList[1]);
+    // this.enrollStudent(this.StudentList[9],this.CourseList[1]);
 
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Basics of JS',[]))
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Let, Const Var',[]))
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Callbacks & Promises',[]))
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Data Binding',[]))
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'SetTimeOut',[]))
-  //   this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'API Call',[]))
+    // let students:Attendance[]=[];
+    // this.CourseList.find(c=>c.CID===2)?.EnrolledStudents.forEach((stu,i)=>{
+    //   if(i%2)
+    //     students.push(new AttendanceClass(stu,true));
+    //   else
+    //     students.push(new AttendanceClass(stu,false));
+
+    // });
+    // let students2:Attendance[]=[];
+    // this.CourseList.find(c=>c.CID===1)?.EnrolledStudents.forEach((stu,i)=>{
+    //   if(i%2)
+    //     students2.push(new AttendanceClass(stu,false));
+    //   else
+    //     students2.push(new AttendanceClass(stu,true));
+    // });
+
+    // this.scheduleNewLecture(new LectureClass(this.LID,1,new Date(),'Basics of JS',students))
+    // this.scheduleNewLecture(new LectureClass(this.LID,1,new Date('05-06-2023'),'Let, Const Var',students))
+    // this.scheduleNewLecture(new LectureClass(this.LID,1,new Date('03-06-2023'),'Callbacks & Promises',students))
+    // this.scheduleNewLecture(new LectureClass(this.LID,2,new Date(),'Data Binding',students2))
+    // this.scheduleNewLecture(new LectureClass(this.LID,2,new Date(),'Types, Interface and classes',students2))
+    // this.scheduleNewLecture(new LectureClass(this.LID,2,new Date(),'Models in TS',students2))
+
    }
 
    addUser(usrID:string, Passwd:string, Role:number){
@@ -197,7 +226,5 @@ export class DataService {
 
    scheduleNewExam(exam:Exam){
     this.ExamList.push(exam)
-   }
-
-
+  }
 }

@@ -23,6 +23,9 @@ export class NavbarComponent {
 
     // this.serv.login('nirmal.shah', '654321');
     // this.navigateByRole('nirmal.shah');
+
+    // this.serv.login('bradley.bell', '123456');
+    // this.navigateByRole('bradley.bell');
     
     // this.serv.login('admin', 'admin');
     // this.navigateByRole('admin');
@@ -43,7 +46,9 @@ handleModal(messageObj:Message, flag:boolean|null){
                     if(flag===true){
                       this.navigateByRole(this.userID);
                       this.Login.reset();
-                    }},2000);
+                    }
+                    this.Login.reset();
+                  },2000);
 }
 
   handleLogin(){
@@ -61,13 +66,13 @@ handleModal(messageObj:Message, flag:boolean|null){
 
   navigateByRole(id:string){
     let role=this.serv.getRoleByUserID(id)
-    console.log(role);
+    // console.log(role);
     switch(role){
       case 1: this.rt.navigate(['/admin/home'])
               break;
       case 2: this.rt.navigate(['/faculty/courses'])
               break;
-      case 3: this.rt.navigate(['/student'])
+      case 3: this.rt.navigate(['/student/myCourses'])
               break;
       default: this.rt.navigate(['/'])
               break;

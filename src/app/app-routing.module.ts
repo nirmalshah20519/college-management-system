@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdminGuard } from './admin.guard';
 import { FacultyGuard } from './faculty.guard';
+import { StudentGuard } from './student.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path:"student",
-    loadChildren: () => import('../Student/student.module').then(s=>s.StudentModule)
+    loadChildren: () => import('../Student/student.module').then(s=>s.StudentModule),
+    canActivate:[StudentGuard]
   }
 ];
 

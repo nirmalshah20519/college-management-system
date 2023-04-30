@@ -1,0 +1,36 @@
+<div class="container p-2">
+    <button class="btn btn-outline-primary d-block float-start" routerLink="/student/myCourses" routerLinkActive="router-link-active" >Back</button>
+  <div class="container text-center">
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        routerLink="./Home"
+        [queryParams]="{ CID: currCID }"
+        routerLinkActive="bg-primary text-light"
+        class="btn btn-outline-primary"
+      >
+        Home
+      </button>
+      <button
+        type="button"
+        routerLink="./Lectures"
+        [queryParams]="{ CID: currCID }"
+        routerLinkActive="bg-primary text-light"        
+        class="btn btn-outline-primary"
+      >
+        Lectures
+      </button>
+      <button
+        type="button"
+        routerLink="./Exams"
+        [queryParams]="{ CID: currCID }"
+        routerLinkActive="bg-primary text-light"
+        class="btn btn-outline-primary"
+      >
+        Exams
+      </button>
+    </div>
+  </div>   
+
+  <router-outlet></router-outlet>
+</div>

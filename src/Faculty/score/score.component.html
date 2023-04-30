@@ -1,3 +1,40 @@
 <div class="container">
-    <p>score works!</p>
+    <ng-container *ngIf="Exams.length===0">
+        <p>No Exams Found</p>
+    </ng-container>
+    <ng-container *ngIf="Exams.length!==0">
+        <table class="table table-striped-columns">
+            <caption></caption>
+            <thead>
+                <tr class="row table-primary">
+                    <th class="col-6 display-4 px-2">Students:</th>
+                    <th class="col-6" colspan="2">
+                            <label for="select">Select Lecture :</label>
+                            <select id="select" class="form-select form-select-sm" [(ngModel)]="currExam">
+                                <option selected>Select one</option>
+                                <ng-container *ngFor="let ex of Exams">
+                                    <option [value]="ex.EID">
+                                        Exam {{ex.EID}} : <span class="text-primary">{{ex.Topic}} - ({{ex.Schedule|date:"mediumDate"}})</span>
+                                    </option>
+                                </ng-container>
+                            </select>
+                    </th>
+                </tr>
+            </thead>
+            <ng-container *ngIf="Students!==undefined">
+                <tbody *ngFor="let score of Students">
+                    <tr class="row">
+                        <td class="col-6">{{score.SID | studentname}}</td>
+                        <td class="col-4 text-center">
+                            <input class="form-control-sm" type="number" (change)="updateScore(score)" [(ngModel)]="score.Score">
+                        </td>
+                        <td class="col-2">
+                            <span *ngIf="score.Score!==null" class="text-success"> {{score.Score}} / {{currExam|totalmarks}} </span> 
+                            <span *ngIf="score.Score===null" class="text-warning"> Not Updated </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </ng-container>
+        </table>
+    </ng-container>
 </div>

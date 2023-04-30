@@ -67,18 +67,14 @@ export class LecturesComponent {
   onSchedule(){
     let students:Attendance[]=[];
     this.serv.CourseList.find(c=>c.CID===this.currCourse)?.EnrolledStudents.forEach(stu=>{
-      students.push(new AttendanceClass(stu,false))
+      students.push(new AttendanceClass(stu,null))
     });
     let id=this.serv.LID
     this.serv.scheduleNewLecture(new LectureClass(id, this.currCourse,this.Schedule,this.Topic,students))
     this.Lecture.reset();
     setTimeout(() => {
         (document.getElementById(`btn-${id}`) as HTMLButtonElement).click();     
-    }, 50);
-    setTimeout(() => {
-      (document.getElementById(`btn-${id}`) as HTMLButtonElement).click();     
-  }, 450);   
-    
+    }, 50);    
   }
 
   onEditLecture(lec:Lecture){

@@ -9,13 +9,14 @@ import { CourseManagementFacultyComponent } from './course-management-faculty/co
 import { LecturesComponent } from './lectures/lectures.component';
 import { ExamsComponent } from './exams/exams.component';
 import { FacultyLandingComponent } from './faculty-landing/faculty-landing.component';
-import { FullnamePipe } from './Pipes/fullname.pipe';
-import { CoursenamePipe } from './Pipes/coursename.pipe';
-import { FacultynamePipe } from './Pipes/facultyname.pipe';
+import { FullnamePipe } from '../Pipes/fullname.pipe';
+import { CoursenamePipe } from '../Pipes/coursename.pipe';
+import { FacultynamePipe } from '../Pipes/facultyname.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { ScoreComponent } from './score/score.component';
-import { StudentnamePipe } from './Pipes/studentname.pipe';
+import { StudentnamePipe } from '../Pipes/studentname.pipe';
+import { TotalmarksPipe } from '../Pipes/totalmarks.pipe';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { StudentnamePipe } from './Pipes/studentname.pipe';
     FacultynamePipe,
     AttendanceComponent,
     ScoreComponent,
-    StudentnamePipe
+    StudentnamePipe,
+    TotalmarksPipe
   ],
   imports: [
     CommonModule,
